@@ -5,16 +5,25 @@ const dataContents = [
         props: {
             width: 500,
             height: 200,
-            visible: true
+            visible: false
 
         },
         content: [{
             id: 1,
             type: 'panel',
             props: {
-                caption: 'test',
+                width: 500,
+                height: 200,
                 visible: false
-            }
+            },
+            content: [{
+                id: 1,
+                type: 'label',
+                props: {
+                    caption: 'test',
+                    visible: false
+                }
+            }]
         }]
     },
 
@@ -34,7 +43,7 @@ const dataContents = [
         props: {
             width: 150,
             height: 100,
-            visible: true
+            visible: false
         },
     }
 ]

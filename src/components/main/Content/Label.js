@@ -7,7 +7,7 @@ import React from 'react';
 function Label( { props } ) {
     const { caption, visible } = props;
     return (
-        visible ?
+        !visible ?
             <span className='content__label text'>{caption}</span>
             : null
     );

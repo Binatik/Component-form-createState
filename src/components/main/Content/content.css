@@ -4,8 +4,14 @@
 }
 
 .content__panel {
+    padding: 16px;
     min-height: 100px;
     border: 1px solid #eeeeee;
+}
+
+
+.content__label {
+    display: block;
 }
 
 .content__button {

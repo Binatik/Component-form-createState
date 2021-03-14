@@ -9,7 +9,7 @@ function Button({ propsClass, text, props, func}) {
     function checkDataButton() {
         if(props) {
             const { width, height, visible } = props;
-            return  visible? <button
+            return  !visible ? <button
                 className={propsClass}
                 style={
                     {

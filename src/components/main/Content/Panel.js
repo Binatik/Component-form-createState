@@ -4,13 +4,15 @@ import React from 'react';
 
 // Component
 
-function Panel({ props, dataCh}) {
+function Panel({ ch, props }) {
 
     const { width, height, visible } = props;
-    const { content, checkContent } = dataCh;
+    const { content, checkContent } = ch;
+    console.log(ch);
 
     return (
-            visible ?
+
+            !visible ?
             <div
                 className='content__panel'
                 style={
@@ -19,10 +21,9 @@ function Panel({ props, dataCh}) {
                         minHeight: height,
                     }
                 }>
+
                 {
-                    Array.isArray(content) ? content.map((ch) => {
-                        return checkContent(ch);
-                    }) : null
+                    Array.isArray(content) ? content.map((ch) => checkContent(ch)) : null
                 }
             </div>
             : null

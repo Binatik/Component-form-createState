@@ -25,17 +25,16 @@ function Main() {
 
     function checkContent(el) {
         const { content } = el
+
         if (el.type === 'panel'){
-            return <Panel
+            return (
+                <Panel
                     key={el.id}
                     props={el.props}
-                    dataCh={
-                        {
-                            content,
-                            checkContent
-                        }
-                    }
-            />
+                    ch={{content, checkContent}}
+                />
+            )
+
         }
 
         if (el.type === 'label'){

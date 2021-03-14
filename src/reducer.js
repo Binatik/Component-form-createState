@@ -9,7 +9,8 @@ export default function(state, action) {
                 if (typeof value === 'object') {
                     value = value.JSON.stringify(value)
                 }
-                eval(`state.${path} = ${value}`);
+
+                eval(`state.${patch} = '${value}'`);
             }
 
             // function parserWay(way, value, object = state) {
