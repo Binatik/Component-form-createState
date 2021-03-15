@@ -39,10 +39,12 @@ You can enter different types of data
  ``` 
  
    ```js 
- //label
+ //button
  { 
     width: 150,
     height: 100,
     visible: false
  }  
- ```
+ ``` 
+ 
+ You can change the type by the specified path.
