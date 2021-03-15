@@ -26,7 +26,7 @@ You can enter different types of data
  { 
     width: 500,
     height: 200,
-    visible: false
+    visible: boolean
  }  
  ``` 
  
@@ -34,7 +34,7 @@ You can enter different types of data
  //label
  { 
     caption: 'test',
-    visible: false
+    visible: boolean
  }  
  ``` 
  
@@ -43,8 +43,45 @@ You can enter different types of data
  { 
     width: 150,
     height: 100,
-    visible: false
+    visible: boolean
  }  
  ``` 
  
  You can change the type by the specified path.
+ 
+ 
+ The "panel" type allows you to supplement the data 
+ 
+ ### Example 
+  
+  
+```js 
+  {
+        id: 1,
+        type: 'panel',
+        props: {
+            width: 500,
+            height: 200,
+            visible: false
+
+        },
+        content: [{
+            id: 1,
+            type: 'panel',
+            props: {
+                width: 500,
+                height: 200,
+                visible: false
+            },
+            content: [{
+                id: 1,
+                type: 'label',
+                props: {
+                    caption: 'test',
+                    visible: false
+                }
+            }]
+        }]
+    },
+ ``` 
+ 
