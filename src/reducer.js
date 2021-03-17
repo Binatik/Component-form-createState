@@ -1,49 +1,87 @@
 import {CREATE} from "./types"
 
-export default function(state, action) {
+export default function caseAction(state, action) {
     switch (action.type) {
         case CREATE:
             const { path, newData } = action.value;
 
-            function useEval(patch, value) {
-                if (typeof value === 'object') {
-                    value = value.JSON.stringify(value)
-                }
-
-                eval(`state.${patch} = '${value}'`);
+            function isObject(obj) {
+                return obj && !Array.isArray(obj) && typeof obj === 'object';
             }
 
-            // function parserWay(way, value, object = state) {
-            //     debugger;
-            //     const parts =  way.split('.')
-            //     let currentPosition = object;
-            //
-            //     function parsed(string) {
-            //         debugger;
-            //         const arrayName = string.match(/\w+/).pop();
-            //         const arrayIndex = parseInt(string.match(/\[(.*)\]/).pop());
-            //
-            //         if (currentPosition[arrayName]) {
-            //             arrayIndex >= currentPosition[arrayName].length
-            //                 ? currentPosition[arrayName].push(value)
-            //                 : currentPosition[arrayName][arrayIndex] = value
-            //         }
-            //     }
-            //
-            //     return parts.map((str, index) => {
-            //         str.includes('[')
-            //             ? parsed(str)
-            //             : currentPosition[str] = index === parts.length - 1 ? value : {}
-            //
-            //         currentPosition = currentPosition[str]
-            //     });
-            // }
+            function processingPath(path) {
+                const parsedPath = []; //массив со всеми обработанными ключами пути.
+                let tmpKey = ''; //кусочек ключа.
+
+                function saveKey (type) {
+                    if (tmpKey) {
+                        parsedPath.push(
+                            {
+                                key: tmpKey,
+                                type
+                            });
+                        tmpKey = '';
+                    }
+                }
+
+                for (const symbol of path) {
+                    if (symbol === '.') {
+                        saveKey('object');
+                        continue;
+                    }
+
+                    if (symbol === '[') {
+                        const lastPathItem = parsedPath[parsedPath.length - 1];
+                        saveKey(lastPathItem ? lastPathItem.type : 'array');
+                        continue;
+                    }
+
+                    if (symbol === ']') {
+                        saveKey('array');
+                        continue;
+                    }
+
+                    tmpKey += symbol;
+                }
+
+                saveKey('object');
+
+                return parsedPath;
+            }
+
+            function insertValue (state, path, value) {
+                const paths = processingPath(path);
+                let tmp = state;
+
+                paths.map((item, index) => {
+                    const { key } = item;
+                    const nextPath = paths[index + 1];
+
+                    if (nextPath) {
+                        const oldVal = tmp[key];
+                        const neededType = nextPath.type;
+
+                        if (
+                            !oldVal ||
+                            neededType === 'object' && !isObject(oldVal) ||
+                            neededType === 'array' && !Array.isArray(oldVal)
+                        )
+                        {
+                            tmp[key] = neededType === 'object' ? {} : [];
+                        }
+                    }
+
+                    return nextPath ? tmp = tmp[key] : tmp[key] = eval( '(' + value + ')' );
+                });
+
+                return state;
+            }
 
             return {
                 ...state,
-                newState: useEval(path, newData)
-
+                newState: insertValue(state, path, newData)
                 //newState: state.dataContent[0].type = 'button',
+                //{type: 'label', props: {caption: 'test', visible: false}}
             }
 
         default: return state

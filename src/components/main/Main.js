@@ -48,7 +48,7 @@ function Main() {
             return <Button
                 key={el.id}
                 propsClass={'content__button button button-large'}
-                text={'Зачем эта кнопка?'}
+                text={'Кнопка'}
                 props={el.props}
             />
         }
@@ -63,7 +63,7 @@ function Main() {
         dispatch({type: CREATE, value})
     }
 
-    console.log(dataContent);
+    console.log(state.dataContent);
 
     return (
         <React.Fragment>

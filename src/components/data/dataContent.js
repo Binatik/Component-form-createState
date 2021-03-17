@@ -20,7 +20,7 @@ const dataContents = [
                 id: 1,
                 type: 'label',
                 props: {
-                    caption: 'test',
+                    caption: 'Текст в  span',
                     visible: false
                 }
             }]
@@ -31,8 +31,8 @@ const dataContents = [
         id: 2,
         type: 'label',
         props: {
-            caption: 'test',
-            visible: false
+            caption: 'Текст в  span',
+            visible: true
 
         },
     },
@@ -49,3 +49,12 @@ const dataContents = [
 ]
 
 export default dataContents;
+
+
+
+
+
+
+
+
+

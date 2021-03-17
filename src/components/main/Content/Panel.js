@@ -8,7 +8,6 @@ function Panel({ ch, props }) {
 
     const { width, height, visible } = props;
     const { content, checkContent } = ch;
-    console.log(ch);
 
     return (
 
