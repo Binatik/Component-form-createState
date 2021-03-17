@@ -65,8 +65,8 @@
  ```js 
  //panel
  { 
-    width: 500,
-    height: 200,
+    width: number,
+    height: number,
     visible: boolean
  }  
  ``` 
@@ -74,7 +74,7 @@
   ```js 
  //label
  { 
-    caption: 'test',
+    caption: 'string',
     visible: boolean
  }  
  ``` 
@@ -82,8 +82,8 @@
    ```js 
  //button
  { 
-    width: 150,
-    height: 100,
+    width: number,
+    height: number,
     visible: boolean
  }  
  ``` 
