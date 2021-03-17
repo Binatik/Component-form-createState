@@ -60,7 +60,7 @@
  {type: 'button'}
 ```  
 <a name="types"></a>
- ### settings  
+ ### Settings  
   
  ```js 
  //panel
